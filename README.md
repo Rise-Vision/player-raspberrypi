@@ -5,7 +5,7 @@ Use of this software is governed by the GPLv3 license (reproduced in the LICENSE
 
 player-raspberrypi is a set of shell script, Java Apps, responsible for launching Viewer in Chrome, to display HTML content from Rise Vision - our digital signage management application. More information about Viewer can be found in the Rise-Vision/viewer repository
 
-Included in this repository are the installation scripts for Raspberry Pi and java applications Player and Cache. When ran, the installers will download and install the Player - “RisePlayer.jar”, rise-cache - “RiseCache.jar”, Chrome and Java 7. 
+Included in this repository are the installation scripts for Raspberry Pi and java applications Player and Cache. When ran, the installer will download and install the Player - “RisePlayer.jar”, rise-cache - “RiseCache.jar”, Chrome and Java 7. 
 
 
 When installation has completed, the Java App’s, RisePlayer.jar and RiseCahce.jar, are launched. 
@@ -29,7 +29,14 @@ All source code for the Project is included in this repository and organized as 
 player and rise-cache are Java Applications. As such, any IDE can be used, requires JDK 1.7  or higher.
 
 
-raspbian-installer are shell scripts and require nothing more than a text editor.
+raspbian-installer is shell script and require nothing more than a text editor. 
+
+Installer connects to server, inquires about new versions for player, rise-cache, chromium and java. If available, download and install. 
+
+It perform checks and configurations, launch player and rise-cache java applications.
+
+Player launches the presentation by opening Rise Viewer in Chromium.
+
 
 
 You can create a Display id by visiting http://risevision.com, you will need to register if you didn't have already and know its FREE.

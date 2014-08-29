@@ -30,8 +30,11 @@ player and rise-cache are Java Applications. As such, any IDE can be used, requi
 
 
 raspbian-installer is shell script and require nothing more than a text editor. 
+
 Installer connects to server, inquires about new versions for player, rise-cache, chromium and java. If available, download and install. 
-And it perform some checks and configurations, launch player and rise-cache java applications.
+
+It perform checks and configurations, launch player and rise-cache java applications.
+
 Player launches the presentation by opening Rise Viewer in Chromium.
 
 

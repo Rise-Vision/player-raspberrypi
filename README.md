@@ -53,6 +53,7 @@ Installer script uses following URL to check for current component version numbe
 
 > 
 **Url**: https://rvacore-test.appspot.com/v2/player/components?os=rsp
+> 
 **Returns**:
 PlayerVersion=2.0.036.rsp.1
 PlayerURL=http://storage.googleapis.com/raspbian/player/RisePlayer_Rsp_1.zip

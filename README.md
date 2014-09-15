@@ -51,11 +51,9 @@ Similary update the SHOW_URL to connect to test "http://viewer-test.appspot.com"
 
 Installer script uses following URL to check for current component version numbers $CORE_URL/v2/player/components?os=rsp
 
-###Example:
-####Url:
-https://rvacore-test.appspot.com/v2/player/components?os=rsp
-
-####Returns:
+> 
+**Url**: https://rvacore-test.appspot.com/v2/player/components?os=rsp
+**Returns**:
 PlayerVersion=2.0.036.rsp.1
 PlayerURL=http://storage.googleapis.com/raspbian/player/RisePlayer_Rsp_1.zip
 InstallerVersion=2.2.0030rsp.1

@@ -3,7 +3,7 @@ package com.risevision.riseplayer;
 public class Globals {
 
 	public static final String APPLICATION_NAME = "RisePlayer";
-	public static final String APPLICATION_VERSION = "2.0.036";
+	public static final String APPLICATION_VERSION = "2.0.036.rsp.1";
 
 	public static final int BASE_PORT = 9449;
 	public static final int MAX_WORKERS = 10;

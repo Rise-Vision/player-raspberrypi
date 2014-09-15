@@ -23,7 +23,7 @@ echo "USER_HOME=$USER_HOME"
 DISPLAY_ID="" 
 CLAIM_ID="#CLAIM_ID#" 
 
-VERSION="2.2.0030rsp"
+VERSION="2.2.0030rsp.1"
 
 RVPLAYER="rvplayer"
 CHROMIUM="chrome"
@@ -52,7 +52,7 @@ RISE_PLAYER_LINUX="RisePlayer"
 RISE_CACHE_LINUX="RiseCache"
 
 CORE_URL="https://rvaserver2.appspot.com" # "https://rvacore-test.appspot.com" # "http://127.0.1.1/temp"
-SHOW_URL="http://rvashow.appspot.com" # "http://viewer-test.appspot.com"
+SHOW_URL="http://rvashow.appspot.com" # "http://viewer-test.appspot.com" # 
 
 DISPPLAYERROR_URL="$CORE_URL/player/update"
 TYPE_CHROMIUM="chromium"

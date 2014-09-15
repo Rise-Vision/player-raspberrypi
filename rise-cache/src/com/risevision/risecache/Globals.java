@@ -3,7 +3,7 @@ package com.risevision.risecache;
 public class Globals {
 
 	public static final String APPLICATION_NAME = "RiseCache";
-	public static final String APPLICATION_VERSION = "1.0.009";
+	public static final String APPLICATION_VERSION = "1.0.009.rsp.1";
 
 	public static final int BASE_PORT = 9494;
 	public static final int MAX_PORT = BASE_PORT + 20; //do not try to open ports above this number

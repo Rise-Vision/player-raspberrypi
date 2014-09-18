@@ -125,4 +125,4 @@ If you would like more information on developing applications for Rise Vision pl
 
 **Facilitator**
 
-[Byron Darlison](https://github.com/ByronDarlison "Byron Darlison")
+[Alan Clayton](https://github.com/alanclayton "Alan Clayton")

@@ -1,96 +1,98 @@
-﻿# player-raspberrypi
+# player-raspberrypi
 
 ## Introduction
 
-player-raspberrypi consists of components to run the presentation on Raspbian - Raspberry Pi.
+player-raspberrypi is a set of components; the Installer, Rise Player and Rise Cache. Together, these components are used to show digital signage on a public display.
 
-- Installer shell script to configure, launch and auto-update the components
-- Cache Java App for maintaining local cache for video files
-- Player Java App responsible for launching [Viewer](https://github.com/Rise-Vision/viewer) in Chrome.
+The Installer is responsible for downloading and installing Rise Player, Rise Cache and Chrome onto the target machine.
 
-player-raspberrypi works in conjunction with [Rise Vision](http://www.risevision.com), the [digital signage management application](http://rva.risevision.com/) that runs on [Google Cloud](https://cloud.google.com).
+Rise Player is responsible for launching Viewer in Chrome, to display HTML content from Rise Vision. In addition, Player will run a local server on port 9449 that is used for communication with Viewer.
+
+Rise Cache will run a local server on port 9494 and serves as a proxy for downloading and serving videos requested by the Video Widget running in Viewer.
+
+Rise Player and Rise Cache works in conjunction with [Rise Vision](http://www.risevision.com), the [digital signage management application](http://rva.risevision.com/) that runs on [Google Cloud](https://cloud.google.com).
+
 
 At this time Chrome is the only browser that this project and Rise Vision supports.
 
-## Built With
-- *Java 1.7*
-- *Shell script*
+Built With
 
-## Development 
+ - Java 1.7
+ - [Eclipse](http://www.eclipse.org/downloads/)
+ 
+## Development
 
 ### Local Development Environment Setup and Installation
-The Java projects RiseCache in /rise-cache and RisePlayer in /player folders in repository can be build using eclipse.
 
-You will need to export these to Runnable jar file
+#### Installer
 
-- *RisePlayer to RisePlayer.jar and*
-- *RiseCache to RiseCache.jar*
+For Raspbian, the installer is a shell script. To edit, open rvplayer-installerraspbian.sh file with any text editor.
 
-Installer script raspbian-installer/rvplayer-installerraspbian.sh in repository can be edited using any editor."
+#### Rise Player and Rise Cache
 
+To build Java projects, you will need Eclipse on your machine. In Eclipse create a new workspace. Import the RiseCache from /rise-cache and RisePlayer from /player into Eclipse.
+
+1. Select File menu
+2. Select Import
+3. Under General, select "Existing Projects into Workspace"
+4. Select the root directory for whichever project you want to import. 
+
+#### To Debug Player project in Eclipse
+
+1. Right click on player project in project Explorer
+2. Select Debug as
+3. Select Java Application
+4. Select Main - com.risevision.riseplayer
+5. Select OK
+
+#### To Debug Rise Cache project in Eclipse
+
+1. Right click on rise-cache project in project Explorer
+2. Select Debug as
+3. Select Java Application
+4. Select Main - com.risevision.risecache
+5. Select OK
+
+#### When you are ready, build and export the projects as .jar files. From Eclipse,
+
+1. Right Click on project in project Explorer
+2. Click Export
+3. From the Java option, select "Runnable Jar File"
+4. Select correct Launch Configuration created during debug steps above
+5. Under export destination, Export
+ - RisePlayer as RisePlayer.jar
+ - RiseCache as RiseCache.jar
 
 ### Run Local
-player-raspberrypi can run locally on Raspbian. It can be installed by running command "sudo rvplayer-installerraspbian.sh" in terminal window. The script will download the required components and configure machine.
 
-####Components:
+#### Installer
 
-- *Installer*
-- *RisePlayer*
-- *RiseCache*
-- *Chromium*
+In Raspbian, run the command "sudo ~./rvplayer-installerraspbian.sh" in terminal window.
 
-####Important configuration steps for testing/running on your raspbian machine
+When launched, Installer connects to the Rise Vision Server and request Component version numbers. If a Component is missing or version number is different, the Component is downloaded.
 
-Installer script upon launch connects to CORE server and request for components version numbers, if component is missing on local machine or version number is different, the particular component is downloaded.
+For testing, it's recommended to set the version of your Component to be equal to the version number on the Server to prevent your Component from being updated from the server. Copy the new updated component in the application folder manually and launch the installer.
 
-For your testing its recommended that the version of your updated component should match with the version number set on the Core server otherwise Installer script will replace your copy with the version set on the server.
+The URL's below can be used to confirm current versions of each component.
 
-The Core server URL is coded in the script, you can update the CORE_URL variable in script to connect to test "https://rvacore-test.appspot.com" or production "https://rvaserver2.appspot.com" or local Core server.
+- Raspbian: https://rvacore-test.appspot.com/v2/player/components?os=rsp
 
-Similary update the SHOW_URL to connect to test "http://viewer-test.appspot.com" or production "http://rvashow.appspot.com" Viewer server
+#### Rise Player and Rise Cache
 
-Installer script uses following URL to check for current component version numbers $CORE_URL/v2/player/components?os=rsp
+Rise Player and Rise Cache are both .jar's and can be ran by right clicking on the file and running with Java Runtime.
 
-> 
-**Url**: https://rvacore-test.appspot.com/v2/player/components?os=rsp
-> 
-**Returns**:
-PlayerVersion=2.0.036.rsp.1
-PlayerURL=http://storage.googleapis.com/raspbian/player/RisePlayer_Rsp_1.zip
-InstallerVersion=2.2.0030rsp.1
-InstallerURL=https://rvacore-test.appspot.com/player/download?os=rsp
-BrowserVersion=22.0.1229.94
-BrowserURL=http://storage.googleapis.com/raspbian/chromium/chrome-linux-raspbian-22.0.1229.94.zip
-CacheVersion=1.0.009.rsp.1
-CacheURL=http://storage.googleapis.com/raspbian/cache/RiseCache_Rsp_1.zip
-JavaVersion=
-JavaURL=
+Rise Vision Player requires a Display ID or Claim ID to connect the Display to the Rise Vision Platform.
 
-If you are making changes to installer script, copy the updated script to file /home/pi/rvplayer/rvplayer and make sure script rvplayer has execute permissions and the installer version number set in variable VERSION match the InstallerVersion set on CORE
+1. From the [Rise Vision Platform](http://rva.risevision.com/) click on Displays
+2. Select Add Display and give it a name.
+3. Click save.
+4. Copy the Display ID and enter it in the Rise Vision Player on startup.
 
-If you are making changes to RisePlayer.jar, copy the updated jar file to folder /home/pi/rvplayer/ and the RisePlayer version number set in java application should macth the PlayerVersion set on CORE
+The Display ID can also be changed in the the "RiseDisplayNetworkII.ini" within the application folder.
 
-If you are making changes to RiseCache.jar, copy the updated jar file to folder /home/pi/rvplayer/RiseCache and the RiseCache version number set in java application should macth the CacheVersion set on CORE
+## Dependencies
 
-raspbian /home/pi/rvplayer folder contain following:
-
-- *chrome-linux directory - Chromium binaries downloaded by Installer*
-- *RiseCache directory - Contains RiseCache.jar and downlaoded video files*
-- *RisePlayer.jar*
-- *rvplayer - Installer script*
-- *chromium.log - Chrmium std err output*
-- *RisePlayer.log - RisePlayer log*
-- *RiseDisplayNetworkII.ini - Configuration file, created by Installer and updated by RisePlayer, contains Core Server URL, Display ID...*
-- *installer.ver - contain Installer vesion number*
-- *RisePlayer.ver - contain RisePlayer vesion number*
-- *chromium.ver - contain Chromium vesion number*
-- *RiseCache.ver - contain RiseCache vesion number*
-
-### Dependencies
-
-- Raspbian Wheezy 3.10
-- Installer script download and install all dependent components and requires sudo
--  Chromium v 22.0.1229.94 - Downloaded and installed by Installer
+All dependencies like Chromium and Java are downloaded and installed by the installer.
 
 ## Submitting Issues 
 If you encounter problems or find defects we really want to hear about them. If you could take the time to add them as issues to this Repository it would be most appreciated. When reporting issues please use the following format where applicable:
@@ -120,9 +122,6 @@ If you are looking for user documentation on Rise Vision please see http://www.r
 
 If you would like more information on developing applications for Rise Vision please visit http://www.risevision.com/help/developers/. 
 
-
-
-
 **Facilitator**
 
-[Byron Darlison](https://github.com/ByronDarlison "Byron Darlison")
+[Alan Clayton](https://github.com/alanclayton "Alan Clayton")
